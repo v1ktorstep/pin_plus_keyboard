@@ -100,7 +100,6 @@ class PinPlusKeyBoardPackage extends StatefulWidget {
 class _PinPlusKeyBoardPackageState extends State<PinPlusKeyBoardPackage> {
   List<int> inputNumbers = [];
   String res = "";
-  String errorText = '';
   @override
   void initState() {
     super.initState();
@@ -131,15 +130,6 @@ class _PinPlusKeyBoardPackageState extends State<PinPlusKeyBoardPackage> {
             children: inputNumbers.map((e) => inputWidget(e)).toList(),
           ),
         ),
-        errorText.isNotEmpty
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  errorText,
-                  style: TextStyle(color: widget.errorColor),
-                ),
-              )
-            : Container(),
         SizedBox(
           height: widget.spacing,
         ),
@@ -222,9 +212,6 @@ class _PinPlusKeyBoardPackageState extends State<PinPlusKeyBoardPackage> {
     }
     if (res.length >= widget.pinInputController.length) {
       widget.onSubmit();
-      setState(() {
-        errorText = '';
-      });
     }
   }
 
@@ -371,13 +358,6 @@ class _PinPlusKeyBoardPackageState extends State<PinPlusKeyBoardPackage> {
                             if (res.length >=
                                 widget.pinInputController.length) {
                               widget.onSubmit();
-                              setState(() {
-                                errorText = '';
-                              });
-                            } else {
-                              setState(() {
-                                errorText = 'Please fill all fields';
-                              });
                             }
                           },
                           // ignore: prefer_const_constructors
